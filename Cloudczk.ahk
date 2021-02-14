@@ -199,8 +199,16 @@ Switch key
         else
             preset("push right")
 
-    case "pageup"  :Send {PgUp}{Down}
-    case "pagedown":Send {PgDn}{Up}
+    case "pageup"  :
+        if WinActive("ahk_exe code.exe")
+            send {PgUp}
+        else 
+            Send {PgUp}{Down}
+    case "pagedown":
+        if WinActive("ahk_exe code.exe")
+            send {PgDn}
+        else 
+            Send {PgDn}{Up}
 }
 
 Return
