@@ -121,10 +121,56 @@ Switch key
     case "num4":
     case "num5":
     case "num6":
-    case "num7":Run,C:\Program Files (x86)\Tencent\QQ\Bin\QQScLauncher.exe
-    case "num8":Run,C:\Program Files (x86)\Tencent\WeChat\WeChat.exe
-    case "num9":Run,C:\Program Files (x86)\DingDing\DingtalkLauncher.exe
-
+    case "num7":
+        QQ:="ahk_class TXGuiFoundation"
+        QQ_path:="C:\Program Files (x86)\Tencent\QQ\Bin\QQ.exe"
+        if ProcessExist("QQ.exe")=0{
+            Run,%QQ_path%
+        }
+        else{
+            WinGet,wxhwnd,ID,%QQ%
+            if strlen(wxhwnd)=0{
+                send !q
+            }
+            else{
+                winhide,%QQ%
+            }
+        }
+        return
+    case "num8":
+        WeChat:="ahk_class WeChatMainWndForPC"
+        Wechat_path:="C:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
+        if ProcessExist("WeChat.exe")=0{
+            Run, %WeChat_path%
+        }
+        else{
+            WinGet,wxhwnd,ID,%WeChat%
+            if strlen(wxhwnd)=0{
+                winshow,%WeChat%
+                winactivate,%WeChat%
+            }
+            else{
+                winhide,%WeChat%
+            }
+        }
+        return
+    case "num9":
+        DingTalk:="ahk_class StandardFrame_DingTalk"
+        DingTalk_path:="C:\Program Files (x86)\DingDing\DingtalkLauncher.exe"
+        if ProcessExist("DingTalk.exe")=0{
+            Run, %DingTalk_path%
+        }
+        else{
+            WinGet,wxhwnd,ID,%DingTalk%
+            if strlen(wxhwnd)=0{
+                winshow,%DingTalk%
+                winactivate,%DingTalk%
+            }
+            else{
+                winhide,%DingTalk%
+            }
+        }
+        return
 
     case "numPlus" : Send {NumpadAdd}  ;加
     case "numMinus": Send {NumpadSub}  ;减
@@ -196,4 +242,9 @@ msgbox, you launched COPY with the parameter %bar%
 paste(foo){
 msgbox, you launched PASTE with the parameter %foo%
 
+}
+
+ProcessExist(exe){
+    Process,Exist,% exe
+    return ErrorLevel
 }
