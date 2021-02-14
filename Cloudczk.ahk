@@ -65,6 +65,8 @@ Switch key
     case "r":
         if WinActive("ahk_exe msedge.exe")
             Send ^+T{F5}
+         else if WinActive("ahk_exe code.exe")
+            send ^+T
     case "t":
     case "y":
     case "u":
@@ -185,11 +187,15 @@ Switch key
     case "left" :
         if WinActive("ahk_exe msedge.exe")
             send ^+{Tab}
+        else if WinActive("ahk_exe code.exe")
+            send ^{PgUp}
         else
             preset("push left")
     case "right": 
         if WinActive("ahk_exe msedge.exe")
             send ^{Tab}
+        else if WinActive("ahk_exe code.exe")
+            send ^{PgDn}
         else
             preset("push right")
 
