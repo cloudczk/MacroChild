@@ -142,6 +142,8 @@ Switch key
         Wechat_path:="C:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
         if ProcessExist("WeChat.exe")=0{
             Run, %WeChat_path%
+            sleep 750
+            MouseClick,Left,180,340
         }
         else{
             WinGet,wxhwnd,ID,%WeChat%
