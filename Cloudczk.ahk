@@ -25,11 +25,15 @@ Switch key
         SoundBeep ,480, 130 ;7
         SoundBeep ,512, 130 ;1!
     case "F2" :
-        instantExplorer("C:\Users\91855\Downloads") ;open the downloads folder, yup.
-    case "F3" :
-        instantExplorer("C:\Users\91855\OneDrive\桌面\别看了学不会的")
+        Run, C:\Users\91855\Downloads
+        ;instantExplorer("C:\Users\91855\Downloads") ;open the downloads folder, yup.
+    case "F3" :      
     case "F4" :
+        Run, C:\KeyBoard(czk)\2nd-keyboard-master\LUAMACROS
+        ;instantExplorer("C:\KeyBoard(czk)\2nd-keyboard-master\LUAMACROS")
     case "F5" :
+        Run, C:\Users\91855\OneDrive\桌面\别看了学不会的
+        ;instantExplorer("C:\Users\91855\OneDrive\桌面\别看了学不会的")
     case "F6" :
     case "F7" :
     case "F8" :
@@ -59,14 +63,20 @@ Switch key
     case "backspace" :
 
 
-    case "tab"       :     
+    case "tab"       :
 
-    case "q":
-    case "w":
-    case "e":
-    case "r":
+    case "q": ;给代码添加文件注释
+        if WinActive("ahk_exe code.exe")
+            send ^+!i
+    case "w": ;给代码添加文件注释 皮
+        if WinActive("ahk_exe code.exe")
+            send ^+!j
+    case "e": ;给代码添加函数注释
+        if WinActive("ahk_exe code.exe")
+            send ^+!t
+    case "r": ;重新打开刚刚关闭的
         if WinActive("ahk_exe msedge.exe")
-            Send ^+T{F5}
+            Send ^+T{F5} ;要刷新一下是因为B站直播直接打开不好使
          else if WinActive("ahk_exe code.exe")
             send ^+T
     case "t":
@@ -84,7 +94,7 @@ Switch key
     case "capslock"    :            
 
     case "a":
-    case "s":
+    case "s":    ;随机数
         Random, Rand, 0, 100
         msgbox,0~100之间随机数为 %Rand%
     case "d":
@@ -104,11 +114,11 @@ Switch key
 
     case "z":
     case "x":
-    case "c":
-    if WinActive("ahk_exe msedge.exe")
-        send ^w
-    else if WinActive("ahk_exe code.exe")
-        send ^w
+    case "c": ;关闭标签页
+        if WinActive("ahk_exe msedge.exe")
+            send ^w
+        else if WinActive("ahk_exe code.exe")
+            send ^w
     case "v":
     case "b":
     case "n":
@@ -126,10 +136,11 @@ Switch key
     case "num1":Run, https://t.bilibili.com/?tab=8
     case "num2":
     case "num3":
-    case "num4":
+    case "num4": ;启动ADS 1.2.4
+        Run,C:\Infineon\AURIX-Studio-1.2.4\AURIX-studio.exe
     case "num5":
     case "num6":
-    case "num7":
+    case "num7": ;要么登录QQ 要么打开 要么关闭
         QQ:="ahk_class TXGuiFoundation"
         QQ_path:="C:\Program Files (x86)\Tencent\QQ\Bin\QQ.exe"
         if ProcessExist("QQ.exe")=0{
@@ -145,7 +156,7 @@ Switch key
             }
         }
         return
-    case "num8":
+    case "num8": ;要么登录WeChat 要么打开 要么关闭
         WeChat:="ahk_class WeChatMainWndForPC"
         Wechat_path:="C:\Program Files (x86)\Tencent\WeChat\WeChat.exe"
         if ProcessExist("WeChat.exe")=0{
@@ -164,7 +175,7 @@ Switch key
             }
         }
         return
-    case "num9":
+    case "num9": ;要么登录DingTalk 要么打开 要么关闭
         DingTalk:="ahk_class StandardFrame_DingTalk"
         DingTalk_path:="C:\Program Files (x86)\DingDing\DingtalkLauncher.exe"
         if ProcessExist("DingTalk.exe")=0{
@@ -190,14 +201,14 @@ Switch key
 
     case "up"   : preset("push up")
     case "down" : preset("push down")
-    case "left" :
+    case "left" : ;左一个标签页
         if WinActive("ahk_exe msedge.exe")
             send ^+{Tab}
         else if WinActive("ahk_exe code.exe")
             send ^{PgUp}
         else
             preset("push left")
-    case "right": 
+    case "right": ;右一个标签页
         if WinActive("ahk_exe msedge.exe")
             send ^{Tab}
         else if WinActive("ahk_exe code.exe")
@@ -205,13 +216,17 @@ Switch key
         else
             preset("push right")
 
-    case "pageup"  :
+    case "pageup"  : ;我嫌PgUp翻的页太多，所以有时候回一下
         if WinActive("ahk_exe code.exe")
+            send {PgUp} ;现在有个Bug就是当可以输入的时候，上下会卡在光标处
+        else if WinActive("ahk_exe msedge.exe")
             send {PgUp}
         else 
             Send {PgUp}{Down}
     case "pagedown":
         if WinActive("ahk_exe code.exe")
+            send {PgDn}
+        else if WinActive("ahk_exe msedge.exe")
             send {PgDn}
         else 
             Send {PgDn}{Up}
